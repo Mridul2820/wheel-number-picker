@@ -41,6 +41,7 @@ const WheelComponent = ({
     setTimeout(() => {
       window.scrollTo(0, 1);
     }, 0);
+    // eslint-disable-next-line
   }, []);
   const wheelInit = () => {
     initCanvas();
