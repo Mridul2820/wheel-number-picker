@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const WheelComponent = ({
+  id,
   segments,
   segColors,
   winningSegment,
@@ -12,12 +13,13 @@ const WheelComponent = ({
   contrastColor,
   buttonText,
   isOnlyOnce = true,
-  size = 290,
+  size,
   upDuration = 100,
   downDuration = 100,
   fontFamily = "Poppins",
   width = 100,
   height = 100,
+  textspace,
 }) => {
   let currentSegment = "";
   let isStarted = false;
@@ -32,8 +34,8 @@ const WheelComponent = ({
   const downTime = segments.length * downDuration;
   let spinStart = 0;
   let frames = 0;
-  const centerX = 300;
-  const centerY = 300;
+  const centerX = size;
+  const centerY = size;
   useEffect(() => {
     wheelInit();
     setTimeout(() => {
@@ -46,7 +48,8 @@ const WheelComponent = ({
   };
 
   const initCanvas = () => {
-    let canvas = document.getElementById("canvas");
+    let canvas = document.getElementById(id);
+    let spinelement = document.getElementById("spin");
     if (navigator.appVersion.indexOf("MSIE") !== -1) {
       canvas = document.createElement("canvas");
       canvas.setAttribute("width", width);
@@ -54,7 +57,7 @@ const WheelComponent = ({
       canvas.setAttribute("id", "canvas");
       document.getElementById("wheel").appendChild(canvas);
     }
-    canvas.addEventListener("click", spin, false);
+    spinelement.addEventListener("click", spin, false);
     canvasContext = canvas.getContext("2d");
   };
 
@@ -142,8 +145,8 @@ const WheelComponent = ({
     ctx.translate(centerX, centerY);
     ctx.rotate((lastAngle + angle) / 2);
     ctx.fillStyle = contrastColor || "white";
-    ctx.font = "bold 1.8em " + fontFamily;
-    ctx.fillText(value.substr(0, 21), size / 2 + 100, 0);
+    ctx.font = "bold 1.7em " + fontFamily;
+    ctx.fillText(value.substr(0, 21), size / 2 + textspace, 0);
     ctx.restore();
   };
 
@@ -181,8 +184,8 @@ const WheelComponent = ({
     ctx.beginPath();
     ctx.arc(centerX, centerY, size, 0, PI2, false);
     ctx.closePath();
-    ctx.lineWidth = 10;
-    ctx.strokeStyle = primaryColoraround || "black";
+    ctx.lineWidth = 1;
+    // ctx.strokeStyle = primaryColoraround || "black";
     ctx.stroke();
   };
 
@@ -219,9 +222,9 @@ const WheelComponent = ({
   return (
     <div id="wheel">
       <canvas
-        id="canvas"
-        width="600"
-        height="600"
+        id={id}
+        width={size * 2}
+        height={size * 2}
         style={{
           pointerEvents: isFinished && isOnlyOnce ? "none" : "auto",
         }}
