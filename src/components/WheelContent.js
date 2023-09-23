@@ -3,13 +3,14 @@ import toast from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 import Confetti from "react-confetti";
 
-import audio from "./assets/spinning.mp3";
-
+import tick from "./assets/tick.mp3";
+import celebration from "./assets/celebration.mp3";
 import WheelComponent from "./WheelComponent";
 import Needle from "./icons/Needle";
 
 const WheelContent = () => {
-  const audioref = useRef(null);
+  const tickRef = useRef(null);
+  const celebrationRef = useRef(null);
   const [showPopup, setShowPopup] = useState(false);
   const [numbers, setNumbers] = useState({
     0: "",
@@ -34,7 +35,10 @@ const WheelContent = () => {
   return (
     <div className="grid grid-cols-2 gap-10 items-center">
       <div className="hidden">
-        <audio id="audio" loop src={audio} ref={audioref} />
+        <audio id="audio" loop src={tick} ref={tickRef} />
+      </div>
+      <div className="hidden">
+        <audio id="audio" src={celebration} ref={celebrationRef} />
       </div>
       <div className="p-2.5 relative min-h-screen">
         <div className="absolute-center rotate-90">
@@ -45,7 +49,8 @@ const WheelContent = () => {
             onFinished={(winner) => {
               onFinished(winner, 4);
               setShowPopup(true);
-              audioref.current.pause();
+              tickRef.current.pause();
+              celebrationRef.current.play();
             }}
             primaryColor="black"
             primaryColoraround="#ffffffb4"
@@ -142,7 +147,7 @@ const WheelContent = () => {
               3: "",
               4: "",
             });
-            audioref.current.play();
+            tickRef.current.play();
           }}
         >
           <Needle />
