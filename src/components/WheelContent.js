@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
 import Confetti from "react-confetti";
+import { BiVolumeFull, BiVolumeMute } from "react-icons/bi";
 
 import tick from "./assets/tick.mp3";
 import celebration from "./assets/celebration.mp3";
@@ -11,6 +12,8 @@ import Needle from "./icons/Needle";
 const WheelContent = () => {
   const tickRef = useRef(null);
   const celebrationRef = useRef(null);
+  const [started, setStarted] = useState(false);
+  const [sound, setSound] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [numbers, setNumbers] = useState({
     0: "",
@@ -32,8 +35,28 @@ const WheelContent = () => {
     });
   };
 
+  useEffect(() => {
+    if (sound) {
+      tickRef.current.volume = 1;
+      celebrationRef.current.volume = 1;
+    } else {
+      tickRef.current.volume = 0;
+      celebrationRef.current.volume = 0;
+    }
+  }, [sound]);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div className="absolute top-5 right-5">
+        <button
+          className="bg-white rounded-full p-1.5 border-2 border-slate-600"
+          onClick={() => {
+            setSound(!sound);
+          }}
+        >
+          {sound ? <BiVolumeFull size={24} /> : <BiVolumeMute size={24} />}
+        </button>
+      </div>
       <div className="hidden">
         <audio id="audio" loop src={tick} ref={tickRef} />
       </div>
@@ -51,6 +74,7 @@ const WheelContent = () => {
               setShowPopup(true);
               tickRef.current.pause();
               celebrationRef.current.play();
+              setStarted(false);
             }}
             primaryColor="black"
             primaryColoraround="#ffffffb4"
@@ -136,9 +160,10 @@ const WheelContent = () => {
             textspace={48}
           />
         </div>
-        <div
+        <button
           id="spin"
           className="absolute-center rounded-full cursor-pointer rotate-90"
+          disabled={started}
           onClick={() => {
             setNumbers({
               0: "",
@@ -148,6 +173,7 @@ const WheelContent = () => {
               4: "",
             });
             tickRef.current.play();
+            setStarted(true);
           }}
         >
           <Needle />
@@ -157,7 +183,7 @@ const WheelContent = () => {
           {numbers[0] && (
             <div className="w-0.5 h-60 bg-black absolute -top-60 left-1/2 -translate-x-1/2 z-[999]" />
           )}
-        </div>
+        </button>
       </div>
       <div className="flex gap-4 justify-center mb-10">
         <div className={numbers[0] ? "numbers-active" : "numbers-inactive"}>
