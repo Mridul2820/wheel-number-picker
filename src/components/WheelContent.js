@@ -33,7 +33,7 @@ const WheelContent = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-10 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
       <div className="hidden">
         <audio id="audio" loop src={tick} ref={tickRef} />
       </div>
@@ -159,7 +159,7 @@ const WheelContent = () => {
           )}
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-center mb-10">
         <div className={numbers[0] ? "numbers-active" : "numbers-inactive"}>
           {numbers[0] ? numbers[0] : "5th Num"}
         </div>
