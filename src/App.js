@@ -2,11 +2,7 @@ import React from "react";
 import WheelContent from "./components/WheelContent";
 
 const App = () => {
-  return (
-    <div>
-      <WheelContent />
-    </div>
-  );
+  return <WheelContent />;
 };
 
 export default App;
