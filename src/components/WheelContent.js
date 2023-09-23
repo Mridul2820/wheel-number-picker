@@ -151,7 +151,7 @@ const WheelContent = () => {
           }}
         >
           <Needle />
-          <span className="absolute-center text-white text-2xl font-bold mt-2 -rotate-90">
+          <span className="absolute-center text-white text-2xl font-bold mt-2 -rotate-90 select-none">
             SPIN
           </span>
           {numbers[0] && (
