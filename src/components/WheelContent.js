@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { AnimatePresence, motion } from "framer-motion";
+
 import WheelComponent from "./WheelComponent";
 import Needle from "./icons/Needle";
 
@@ -147,52 +150,68 @@ const WheelContent = () => {
           {numbers[4] ? numbers[4] : "1st Num"}
         </div>
       </div>
-      {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-40">
-          <div className="absolute-center bg-white rounded-lg p-10 m-5 space-y-6 max-w-4xl w-full">
-            <p className="text-3xl text-slate-700 font-bold text-center">
-              Winner Of Something
-            </p>
-            <p className="text-4xl text-primary font-bold text-center">
-              {numbers[0] +
-                "  " +
-                numbers[1] +
-                "  " +
-                numbers[2] +
-                "  " +
-                numbers[3] +
-                "  " +
-                numbers[4]}
-            </p>
-            <div className="button-wrap">
-              <button
-                className="button"
-                onClick={() => {
-                  navigator.clipboard.writeText(
-                    numbers[0] +
-                      numbers[1] +
-                      numbers[2] +
-                      numbers[3] +
-                      numbers[4]
-                  );
-                }}
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute-center w-full">
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white rounded-lg p-10 m-5 space-y-6 max-w-3xl w-full mx-auto"
               >
-                Copy
-              </button>
+                <p className="text-3xl text-slate-700 font-bold text-center w-full">
+                  Winner Of Something
+                </p>
+                <p className="text-4xl text-primary font-bold text-center">
+                  {numbers[0] +
+                    "  " +
+                    numbers[1] +
+                    "  " +
+                    numbers[2] +
+                    "  " +
+                    numbers[3] +
+                    "  " +
+                    numbers[4]}
+                </p>
+                <div className="button-wrap">
+                  <button
+                    className="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        numbers[0] +
+                          numbers[1] +
+                          numbers[2] +
+                          numbers[3] +
+                          numbers[4]
+                      );
+                      toast.success("Copied to clipboard");
+                    }}
+                  >
+                    Copy
+                  </button>
+                </div>
+                <div className="button-wrap">
+                  <button
+                    className="button"
+                    onClick={() => {
+                      setShowPopup(false);
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
+              </motion.div>
             </div>
-            <div className="button-wrap">
-              <button
-                className="button"
-                onClick={() => {
-                  setShowPopup(false);
-                }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
