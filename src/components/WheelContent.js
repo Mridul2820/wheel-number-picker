@@ -1,5 +1,6 @@
 import React from "react";
 import WheelComponent from "./WheelComponent";
+import Needle from "./icons/Needle";
 
 const WheelContent = () => {
   const segments = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -9,22 +10,8 @@ const WheelContent = () => {
   };
 
   return (
-    <div
-      style={{
-        padding: "10px",
-        position: "relative",
-        width: "700px",
-        height: "100vh",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
+    <div className="p-2.5 relative min-h-screen">
+      <div className="absolute-center">
         <WheelComponent
           segments={segments}
           segColors={segColors}
@@ -42,14 +29,7 @@ const WheelContent = () => {
           textspace={125}
         />
       </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
+      <div className="absolute-center">
         <WheelComponent
           segments={segments}
           segColors={segColors}
@@ -67,14 +47,7 @@ const WheelContent = () => {
           textspace={95}
         />
       </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
+      <div className="absolute-center">
         <WheelComponent
           segments={segments}
           segColors={segColors}
@@ -92,14 +65,7 @@ const WheelContent = () => {
           textspace={72}
         />
       </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
+      <div className="absolute-center">
         <WheelComponent
           segments={segments}
           segColors={segColors}
@@ -119,18 +85,13 @@ const WheelContent = () => {
       </div>
       <div
         id="spin"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "85px",
-          height: "85px",
-          borderRadius: "50%",
-          overflow: "hidden",
-          cursor: "pointer",
-        }}
-      />
+        className="absolute-center rounded-full overflow-hidden cursor-pointer"
+      >
+        <Needle />
+        <span className="absolute-center text-white text-2xl font-bold mt-2">
+          SPIN
+        </span>
+      </div>
     </div>
   );
 };
