@@ -154,7 +154,9 @@ const WheelContent = () => {
           <span className="absolute-center text-white text-2xl font-bold mt-2 -rotate-90">
             SPIN
           </span>
-          <div className="w-0.5 h-60 bg-black absolute -top-60 left-1/2 -translate-x-1/2 z-[999]" />
+          {numbers[0] && (
+            <div className="w-0.5 h-60 bg-black absolute -top-60 left-1/2 -translate-x-1/2 z-[999]" />
+          )}
         </div>
       </div>
       <div className="flex gap-4">
