@@ -31,13 +31,13 @@ const WheelContent = () => {
   return (
     <div className="grid grid-cols-2 gap-10 items-center">
       <div className="p-2.5 relative min-h-screen">
-        <div className="absolute-center">
+        <div className="absolute-center rotate-90">
           <WheelComponent
             segments={segments}
             segColors={segColors}
             winningSegment=""
             onFinished={(winner) => {
-              onFinished(winner, 0);
+              onFinished(winner, 4);
               setShowPopup(true);
             }}
             primaryColor="black"
@@ -52,12 +52,12 @@ const WheelContent = () => {
             textspace={130}
           />
         </div>
-        <div className="absolute-center">
+        <div className="absolute-center rotate-90">
           <WheelComponent
             segments={segments}
             segColors={segColors}
             winningSegment=""
-            onFinished={(winner) => onFinished(winner, 1)}
+            onFinished={(winner) => onFinished(winner, 3)}
             primaryColor="black"
             primaryColoraround="#ffffffb4"
             contrastColor="white"
@@ -70,7 +70,7 @@ const WheelContent = () => {
             textspace={108}
           />
         </div>
-        <div className="absolute-center">
+        <div className="absolute-center rotate-90">
           <WheelComponent
             segments={segments}
             segColors={segColors}
@@ -88,12 +88,12 @@ const WheelContent = () => {
             textspace={88}
           />
         </div>
-        <div className="absolute-center">
+        <div className="absolute-center rotate-90">
           <WheelComponent
             segments={segments}
             segColors={segColors}
             winningSegment=""
-            onFinished={(winner) => onFinished(winner, 3)}
+            onFinished={(winner) => onFinished(winner, 1)}
             primaryColor="black"
             primaryColoraround="#ffffffb4"
             contrastColor="white"
@@ -106,12 +106,12 @@ const WheelContent = () => {
             textspace={68}
           />
         </div>
-        <div className="absolute-center">
+        <div className="absolute-center rotate-90">
           <WheelComponent
             segments={segments}
             segColors={segColors}
             winningSegment=""
-            onFinished={(winner) => onFinished(winner, 4)}
+            onFinished={(winner) => onFinished(winner, 0)}
             primaryColor="black"
             primaryColoraround="#ffffffb4"
             contrastColor="white"
@@ -126,10 +126,19 @@ const WheelContent = () => {
         </div>
         <div
           id="spin"
-          className="absolute-center rounded-full overflow-hidden cursor-pointer"
+          className="absolute-center rounded-full overflow-hidden cursor-pointer rotate-90"
+          onClick={() => {
+            setNumbers({
+              0: "",
+              1: "",
+              2: "",
+              3: "",
+              4: "",
+            });
+          }}
         >
           <Needle />
-          <span className="absolute-center text-white text-2xl font-bold mt-2">
+          <span className="absolute-center text-white text-2xl font-bold mt-2 -rotate-90">
             SPIN
           </span>
         </div>
