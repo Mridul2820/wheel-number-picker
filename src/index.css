@@ -12,7 +12,7 @@ body {
 }
 
 .numbers {
-  @apply border-2 border-primary p-4 w-[88px] h-24 flex items-center justify-center rounded-md;
+  @apply border-2 border-primary p-4 w-[88px] h-24 flex items-center justify-center rounded-md select-none;
 }
 
 .numbers-inactive {

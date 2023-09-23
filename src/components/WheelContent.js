@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
+import Confetti from "react-confetti";
 
 import WheelComponent from "./WheelComponent";
 import Needle from "./icons/Needle";
@@ -166,6 +167,9 @@ const WheelContent = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-lg p-10 m-5 space-y-6 max-w-3xl w-full mx-auto"
               >
+                <div className="absolute inset-0 w-full h-full max-w-3xl mx-auto my-5 pointer-events-none">
+                  <Confetti width="740" height="340" />
+                </div>
                 <p className="text-3xl text-slate-700 font-bold text-center w-full">
                   Winner Of Something
                 </p>
